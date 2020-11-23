@@ -1,0 +1,6 @@
+#creazione tunnel ngrok
+npm run tunnel
+#avvio server node
+npm start
+#avvio server in modalità dev (deprecated)
+npm run dev

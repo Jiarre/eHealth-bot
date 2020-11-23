@@ -1,0 +1,26 @@
+{
+  "name": "telegram-bot",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon --inspect app.js",
+    "start": "node ./bin/www",
+    "tunnel": "ngrok http 3000"
+  },
+  "dependencies": {
+    "actions-on-google": "^2.13.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dialogflow": "^1.2.0",
+    "dialogflow-fulfillment": "^0.6.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1",
+    "telegraf": "^3.38.0"
+  },
+  "devDependencies": {
+    "ngrok": "^3.3.0",
+    "nodemon": "^2.0.6"
+  }
+}
