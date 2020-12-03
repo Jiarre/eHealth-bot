@@ -7,7 +7,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var dialogflowRouter = require('./routes/dialogflow');
+var dialogflowRouter = require('./routes/dialogflow'); //unica modifica al file di default, aggiungiamo il file per le routes
 const { dialogflow } = require('actions-on-google');
 
 var app = express();
