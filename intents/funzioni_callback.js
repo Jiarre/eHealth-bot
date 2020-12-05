@@ -111,10 +111,7 @@ async function visualizza_spec(agent){ //Visualizza la lista degli specialisti p
     var nome = agent.parameters["nome"];
     var professione = agent.parameters["professione"];
     console.log(professione);
-    if(professione == null) //TODO: non capisco perchè cazzo non entra qui
-    {
-        professione = "*";
-    }
+    
     var ris  = nome+ ", ecco la lista degli specialisti disponibili per quello che stai cercando\n\n";
     ris+= await query_db_professioni(professione);
     ris+= "\n\nVuoi prendere un appuntamento con uno di loro?"
@@ -186,11 +183,22 @@ async function query_db_contatti(){ //query per la lista di tutti gli specialsti
 }
 
 async function query_db_professioni(professione){ //query per trovare tutti gli specialisti di una professione
+  if(professione != "*")
+  {
   return db.collection('Contatti').where("Professione","==",professione).get().then(function(querySnapshot) {
       var tmp ="";
       querySnapshot.forEach(doc=> tmp+="Nome: " + doc.data().Nome + "\nProfessione: " + doc.data().Professione + "\nDisponibilità: " + doc.data().Disponibile + "\nNumero di Telefono: "+doc.data().Numero+"\nSito: "+doc.data().Sito+"\n\n");
       return tmp;
       });
+  }
+  else
+  {
+    return db.collection('Contatti').get().then(function(querySnapshot) {
+      var tmp ="";
+      querySnapshot.forEach(doc=> tmp+="Nome: " + doc.data().Nome + "\nProfessione: " + doc.data().Professione + "\nDisponibilità: " + doc.data().Disponibile + "\nNumero di Telefono: "+doc.data().Numero+"\nSito: "+doc.data().Sito+"\n\n");
+      return tmp;
+      });
+  }
 }
 async function visualizza_db(nome) //query per gli appuntamenti
 {
