@@ -36,12 +36,14 @@ function frasi_motivazionali(agent){      //Intent Frazi Motivazionali
             ris += 'Non stare in ansia '+ agent.parameters["nome"];
             break;
         case "arrabbiato":
-            ris += 'Oh cazzo oh merda no ti prego '+agent.parameters["nome"]+' non picchiarmi';
+            ris += 'Oh no '+agent.parameters["nome"]+' spero non sia nulla di grave! Vuoi parlarne con qualcuno?';
             break;
         case "male":
             ris += "Mi dispiace che tu ti senta così, "+ agent.parameters["nome"]+ "\nHai bisogno di una mano?";
             break;
-    
+        case "non lo so":
+            ris += "Capisco come ti senti, ogni tanto anch'io mi blocco "+ agent.parameters["nome"]+ "...\nVuoi che provi ad aiutarti?";
+            break;
 
     }
     if(umore != "triste") //Se l'umore non è triste invia i bottoni
@@ -54,7 +56,7 @@ function frasi_motivazionali(agent){      //Intent Frazi Motivazionali
                     {
                       "text": "Visualizza una lista degli specialisti",
                       "callback_data": "lista specialisti"
-                      
+
                     }
                   ],
                   [
@@ -89,7 +91,7 @@ function frasi_motivazionali(agent){      //Intent Frazi Motivazionali
         agent.add(new Payload(agent.UNSPECIFIED,payload,{ rawPayload: true, sendAsMessage: true}));
     }
     agent.add(ris);
-    
+
 }
 
 async function frasi_motivazionali_yes (agent) { //Se l'utente ha bisogno di aiuto mostra le onlus
@@ -100,7 +102,7 @@ async function frasi_motivazionali_yes (agent) { //Se l'utente ha bisogno di aiu
 async function frasi_motivazionali_yy(agent){ //Invia la lista di tutti gli specialisti
     var ris = await query_db_contatti();
     agent.add(ris);
-     
+
 }
 
 // INTENT VISUALIZZA SPECIALIZZAZIONE
@@ -114,8 +116,8 @@ async function visualizza_spec(agent){ //Visualizza la lista degli specialisti p
         professione = "*";
     }
     var ris  = nome+ ", ecco la lista degli specialisti disponibili per quello che stai cercando\n\n";
-    ris+= await query_db_professioni(professione); 
-    ris+= "\n\nVuoi prendere un appuntamento con uno di loro?" 
+    ris+= await query_db_professioni(professione);
+    ris+= "\n\nVuoi prendere un appuntamento con uno di loro?"
     agent.add(ris);
 }
 
@@ -148,10 +150,10 @@ async function prendi_appuntamento_yes(agent){ //funzione per prendere un appunt
         Piattaforma: piattaforma
     }
     db.collection('Appuntamenti').add(dataset);
-    
+
     agent.add("Bene, ho preso un appuntamento con "+ nome_specialista + " per il "+ data +" alle ore "+ora+ " via "+ piattaforma );
-   
-        
+
+
 }
 async function visualizza_yes(agent){
    //Questo intent è gestito dal server Node ma è reindirizzato alle stesse funzioni dell'intent "Prendi appuntamento - yes"
@@ -161,7 +163,7 @@ async function visualizza_yes(agent){
 async function visualizza_appuntamenti(agent){ //Intent Visualizza Appuntamenti
     var ris = "";
     ris += await visualizza_db(agent.parameters["nome"]);
-    agent.add("Ecco a te "+ agent.parameters["nome"]+ "\n\n" +ris+ "Ricorda che puoi chiedermi in qualsiasi momento di prendere una nuova prenotazione!");
+    agent.add("Ecco a te "+ agent.parameters["nome"]+ "\n\n" +ris+ "Ricorda che puoi chiedermi in qualsiasi momento di prenotare un nuovo appuntamento!");
 }
 
 
