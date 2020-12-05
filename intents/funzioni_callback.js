@@ -121,7 +121,12 @@ async function visualizza_appuntamenti(agent){ //Intent Visualizza Appuntamenti
     ris += await visualizza_db(agent.parameters["nome"]);
     agent.add("Ecco a te "+ agent.parameters["nome"]+ "\n\n" +ris+ "Ricorda che puoi chiedermi in qualsiasi momento di prenotare un nuovo appuntamento!");
 }
-
+//INTENT VISUALIZZA ASSOCIAZIONI
+async function visualizza_associazioni(agent){ //Intent Visualizza Associazioni
+  var ris = "";
+  ris += query_onlus();
+  agent.add("Ecco a te "+ agent.parameters["nome"]+ "\n\n" +ris);
+}
 
 //QUERY DB
 async function query_onlus() //query per la lista di tutte le associazioni
@@ -169,4 +174,4 @@ async function visualizza_db(nome) //query per gli appuntamenti
 
         });
 }
-module.exports = { welcome: welcome, frasi_motivazionali: frasi_motivazionali, frasi_motivazionali_yes: frasi_motivazionali_yes, frasi_motivazionali_yy: frasi_motivazionali_yy, visualizza_spec: visualizza_spec, prendi_appuntamento: prendi_appuntamento, prendi_appuntamento_yes: prendi_appuntamento_yes, visualizza_appuntamenti: visualizza_appuntamenti, visualizza_yes: visualizza_yes};
+module.exports = { welcome: welcome, frasi_motivazionali: frasi_motivazionali, frasi_motivazionali_yes: frasi_motivazionali_yes, frasi_motivazionali_yy: frasi_motivazionali_yy, visualizza_spec: visualizza_spec, prendi_appuntamento: prendi_appuntamento, prendi_appuntamento_yes: prendi_appuntamento_yes, visualizza_appuntamenti: visualizza_appuntamenti, visualizza_yes: visualizza_yes, visualizza_associazioni: visualizza_associazioni};
