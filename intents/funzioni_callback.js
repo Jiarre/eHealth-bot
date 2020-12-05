@@ -42,7 +42,9 @@ function frasi_motivazionali(agent){      //Intent Frazi Motivazionali
             ris += "Mi dispiace che tu ti senta così, "+ agent.parameters["nome"]+ "\nHai bisogno di una mano?";
             break;
         case "non lo so":
-            ris += "Capisco come ti senti, ogni tanto anch'io mi blocco "+ agent.parameters["nome"]+ "...\nVuoi che provi ad aiutarti?";
+        agent.add("Capisco come ti senti, ogni tanto anch'io mi sento come bloccato "+ agent.parameters["nome"]+ "...");
+            ris += "Vuoi che provi ad aiutarti?";
+
             break;
 
     }
