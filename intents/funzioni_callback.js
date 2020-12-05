@@ -46,50 +46,7 @@ function frasi_motivazionali(agent){      //Intent Frazi Motivazionali
             break;
 
     }
-    if(umore != "triste") //Se l'umore non è triste invia i bottoni
-    {
-        var payload = {
-            "telegram": {
-              "reply_markup": {
-                "inline_keyboard": [
-                  [
-                    {
-                      "text": "Visualizza una lista degli specialisti",
-                      "callback_data": "lista specialisti"
 
-                    }
-                  ],
-                  [
-                    {
-                      "text": "Prenota un appuntamento con uno specialista",
-                      "callback_data": "prenota un appuntamento"
-                    }
-                  ],
-                  [
-                    {
-                      "callback_data": "frase motivazionale",
-                      "text": "Chiedimi una frase motivazionale"
-                    }
-                  ],
-                  [
-                    {
-                      "callback_data": "gruppo telegram",
-                      "text": "Chiedimi di inserirti nel gruppo di supporto"
-                    }
-                  ],
-                  [
-                    {
-                      "text": "Visualizza le associazioni di supporto",
-                      "callback_data": "fammi vedere le associazioni"
-                    }
-                  ]
-                ]
-              },
-              "text": ris + "\nEcco la lista delle azioni che puoi compiere😎"
-            }
-          };
-        agent.add(new Payload(agent.UNSPECIFIED,payload,{ rawPayload: true, sendAsMessage: true}));
-    }
     agent.add(ris);
 
 }
@@ -111,7 +68,7 @@ async function visualizza_spec(agent){ //Visualizza la lista degli specialisti p
     var nome = agent.parameters["nome"];
     var professione = agent.parameters["professione"];
     console.log(professione);
-    
+
     var ris  = nome+ ", ecco la lista degli specialisti disponibili per quello che stai cercando\n\n";
     ris+= await query_db_professioni(professione);
     ris+= "\n\nVuoi prendere un appuntamento con uno di loro?"
