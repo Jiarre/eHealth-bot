@@ -42,7 +42,7 @@ function frasi_motivazionali(agent){      //Intent Frazi Motivazionali
             ris += "Mi dispiace che tu ti senta così, "+ agent.parameters["nome"]+ "\nHai bisogno di una mano?";
             break;
         case "non lo so":
-        agent.add("Capisco come ti senti, ogni tanto anch'io mi sento come bloccato "+ agent.parameters["nome"]+ "...");
+            agent.add("Capisco come ti senti, ogni tanto anch'io mi sento come bloccato "+ agent.parameters["nome"]+ "...");
             ris += "Vuoi che provi ad aiutarti?";
 
             break;
@@ -93,11 +93,13 @@ async function prendi_appuntamento_yes(agent){ //funzione per prendere un appunt
     var data = agent.parameters["data"];                  //ottengo tutti i parametri che mi servono
     var ora = agent.parameters["ora"];
     var piattaforma = agent.parameters["piattaforma"];
+    console.log(data);
     var tmp= data.split("T");                             //magiche magie per dividere una stringa GG:MM:AAAATHH:MM:SS+01 in data e ora
-    data = tmp[0];
+    var data = tmp[0];
     var tmp1 = ora.split("T");
     var tmp2 = tmp1[1].split("+");
-    ora = tmp2[0];
+    var tmp_sec = tmp2[0].split(":")
+    var ora = tmp_sec[0] + ":" + tmp_sec[1];
     const dataset = {
         Paziente: nome,
         Data: data,
