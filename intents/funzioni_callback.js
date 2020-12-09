@@ -122,7 +122,7 @@ async function visualizza_appuntamenti(agent){ //Intent Visualizza Appuntamenti
 //INTENT VISUALIZZA ASSOCIAZIONI
 async function visualizza_associazioni(agent){ //Intent Visualizza Associazioni
   var ris = "";
-  ris += query_onlus();
+  ris += await query_onlus();
   agent.add("Ecco a te "+ agent.parameters["nome"]+ "\n\n" +ris);
 }
 
